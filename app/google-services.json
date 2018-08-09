@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "338601786076",
+    "firebase_url": "https://alertnotification-a0fd6.firebaseio.com",
+    "project_id": "alertnotification-a0fd6",
+    "storage_bucket": "alertnotification-a0fd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338601786076:android:e1fe906d8ac57de7",
+        "android_client_info": {
+          "package_name": "com.example.lvo.alertnotifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338601786076-drnslujm8nlnoh6osa9pg00o5t7kbkor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDobo5Q2Va1Q7unfmMeUDFCy4qtO3LADAw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
