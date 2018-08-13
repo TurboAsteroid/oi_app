@@ -39,17 +39,20 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     public void onSentClick (View view) {
-        TextView textView = findViewById(R.id.nameField);
-        App.getApi().registerUser(FirebaseInstanceId.getInstance().getToken(), textView.getText().toString()).enqueue(new Callback<userInfoModel>() {
+        TextView textViewLogin = findViewById(R.id.loginField);
+        TextView textViewPass = findViewById(R.id.passwordField);
+        App.getApi().registerUser(FirebaseInstanceId.getInstance().getToken(), textViewLogin.getText().toString(), textViewPass.getText().toString()).enqueue(new Callback<userInfoModel>() {
             @Override
             public void onResponse(Call<userInfoModel> call, Response<userInfoModel> response) {
                 //Данные успешно пришли, но надо проверить response.body() на null
                 Log.d("REQUEST", response.body().toString() );
                 user = response.body();
 
+
+
                 if (Integer.parseInt(user.getStatus()) == 0) {
-//                    TextView textView = findViewById(R.id.greeting);
-//                    textView.setText(String.format(getString(R.string.hello), user.getName()));
+                    TextView textView = findViewById(R.id.loginerror);
+                    textView.setVisibility(View.VISIBLE);
                 } else {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);

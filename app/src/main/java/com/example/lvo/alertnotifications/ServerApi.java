@@ -7,7 +7,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-//import com.example.lvo.alertnotifications.UserByTokenModel;
 import com.example.lvo.alertnotifications.userInfoModel;
 
 public interface ServerApi {
@@ -17,7 +16,7 @@ public interface ServerApi {
 
     @FormUrlEncoded
     @POST("/users/new")
-    Call<userInfoModel> registerUser(@Field("token") String token, @Field("name") String name);
+    Call<userInfoModel> registerUser(@Field("token") String token, @Field("login") String login, @Field("password") String password);
 
 
 }
