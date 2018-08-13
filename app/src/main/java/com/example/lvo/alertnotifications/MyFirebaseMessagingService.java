@@ -57,21 +57,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
+
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
-            if (/* Check if data needs to be processed by long running job */ false) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                scheduleJob();
-            } else {
-                // Handle message within 10 seconds
-                handleNow();
-            }
-
-        }
+        handleNow();
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
@@ -110,6 +100,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
+
+    // ПОЛУЧЯЕНИЕ СООБЩЕНИЙ ПРИ ОТКРЫТОМ ПРИЛОЖЕНИИ
     private void sendNotification(com.google.firebase.messaging.RemoteMessage remotemessage) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -117,14 +109,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);
-//        Uri defaultSoundUri = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.march);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
-//                .setContentTitle(remotemessage.getNotification().getTitle())
-                .setContentTitle("11")
-                .setContentText(remotemessage.getNotification().getBody())
+                        //.setContentTitle(remotemessage.getNotification().getTitle())
+                .setContentTitle(remotemessage.getData().get("title"))
+               // .setContentText(remotemessage.getNotification().getBody())
+                .setContentText(remotemessage.getData().get("body"))
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);

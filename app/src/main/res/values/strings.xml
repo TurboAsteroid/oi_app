@@ -23,6 +23,8 @@
     <string name="msg_subscribe_failed">Failed to subscribe to news topic</string>
     <string name="hello">Добро пожаловать, %1$s!</string>
     <string name="whoareyou">Пожалуйста представьтесь</string>
-    <string name="yourname">Введите ФИО</string>
+    <string name="login">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="loginerror">Не верные данные, попробуйте ещё раз</string>
     <string name="sent">Отправить</string>
 </resources>
