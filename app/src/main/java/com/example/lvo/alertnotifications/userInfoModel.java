@@ -16,7 +16,7 @@ public class userInfoModel {
     private String name;
     @SerializedName("notification")
     @Expose
-    private List<Notification> notification = null;
+    private List<NotificationModel> notification = null;
 
     public String getStatus() {
         return status;
@@ -42,11 +42,11 @@ public class userInfoModel {
         this.name = name;
     }
 
-    public List<Notification> getNotification() {
+    public List<NotificationModel> getNotification() {
         return notification;
     }
 
-    public void setNotification(List<Notification> notification) {
+    public void setNotification(List<NotificationModel> notification) {
         this.notification = notification;
     }
 

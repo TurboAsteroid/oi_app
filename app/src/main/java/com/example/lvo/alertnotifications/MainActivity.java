@@ -33,6 +33,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
+
 public class MainActivity extends AppCompatActivity {
     userInfoModel user;
     ArrayAdapter<String> adapter;
@@ -80,17 +83,26 @@ public class MainActivity extends AppCompatActivity {
                     TextView textView = findViewById(R.id.greeting);
                     textView.setText(String.format(getString(R.string.hello), user.getName()));
 
-                    List<Notification> att= user.getNotification();
-                    if(att.size()!=0) {
-                        String[] names = new String[att.size()];
-                        int a = 0;
-                        for (Notification x : att) {
-                            names[a] = x.getTitle();
-                            a = a + 1;
-                        }
-                        ListView listView = findViewById(R.id.mylist);
-                        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, names);
-                        listView.setAdapter(adapter);
+                    List<NotificationModel> att= user.getNotification();
+
+                    RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                    mRecyclerView.setHasFixedSize(true);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MainActivity.this);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+
+                    RecyclerView.Adapter mAdapter = new MyAdapter(att);
+                    mRecyclerView.setAdapter(mAdapter);
+
+//                    if(att.size()!=0) {
+//                        String[] names = new String[att.size()];
+//                        int a = 0;
+//                        for (Notification x : att) {
+//                            names[a] = x.getTitle();
+//                            a = a + 1;
+//                        }
+//                        ListView listView = findViewById(R.id.mylist);
+//                        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, names);
+//                        listView.setAdapter(adapter);
 //                        listView.setOnItemClickListener(new OnItemClickListener() {
 //                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                                Toast.makeText(MainActivity.this, "itemClick: position = " + position + ", id = " + id, Toast.LENGTH_SHORT).show();
@@ -98,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //                                adapter.notifyDataSetChanged();
 //                            }
 //                        });
-                    }
+//                    }
                 }
             }
             @Override

@@ -8,6 +8,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 import com.example.lvo.alertnotifications.userInfoModel;
+import com.example.lvo.alertnotifications.simpleResponceModel;
 
 public interface ServerApi {
 
@@ -17,6 +18,10 @@ public interface ServerApi {
     @FormUrlEncoded
     @POST("/users/new")
     Call<userInfoModel> registerUser(@Field("token") String token, @Field("login") String login, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/incedent/checknotification")
+    Call<simpleResponceModel> checkNotification(@Field("token") String token, @Field("notification_id") String id);
 
 
 }
