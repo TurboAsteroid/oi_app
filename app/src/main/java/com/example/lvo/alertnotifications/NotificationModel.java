@@ -3,7 +3,7 @@ package com.example.lvo.alertnotifications;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Notification {
+public class NotificationModel {
 
     @SerializedName("id")
     @Expose
@@ -14,6 +14,9 @@ public class Notification {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("complete")
+    @Expose
+    private String complete;
 
     public String getId() {
         return id;
@@ -37,6 +40,14 @@ public class Notification {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getComplete() {
+        return complete;
+    }
+
+    public void setStatus(String complete) {
+        this.complete = complete;
     }
 
 }
