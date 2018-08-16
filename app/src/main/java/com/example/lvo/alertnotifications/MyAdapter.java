@@ -20,6 +20,15 @@ import retrofit2.Response;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<NotificationModel> mDataset;
     public static String notificationStatus;
+//    OnItemClickListener mItemClickListener;
+
+//    public interface OnItemClickListener {
+//        public void onItemClick(View view , int position);
+//    }
+//    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+//        this.mItemClickListener = mItemClickListener;
+//    }
+
 
     // Provide a reference to the views for each data item
 // Complex data items may need more than one view per item, and
@@ -27,10 +36,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
 //        public TextView mTextText;
-        public TextView mTextTitle;
-        public TextView textViewId;
-        public Switch mTextSwitch;
-        public ViewHolder(View v) {
+        private TextView mTextTitle;
+        private TextView textViewId;
+        private Switch mTextSwitch;
+        private ViewHolder(View v) {
             super(v);
             mTextSwitch = v.findViewById(R.id.switch1);
             mTextSwitch.setClickable(false);
@@ -44,9 +53,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             mTextTitle.setText(message.getTitle());
             textViewId.setText(message.getId());
 
-            //Log.d("!!!!!!!!!!!!!!!!!!!!!!!!!!!", message.getId().concat(" - ").concat(message.getTitle()).concat(" - ").concat(message.getComplete()) );
+//            Log.d("!!!!!!!!!!!!!!!!!!!!!!!!!!!", message.getId().concat(" - ").concat(message.getTitle()).concat(" - ").concat(message.getComplete()) );
             if (Integer.parseInt( message.getComplete()) == 1) {
                 mTextSwitch.setChecked(true);
+            } else {
+                mTextSwitch.setChecked(false);
             }
         }
     }
@@ -70,7 +81,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 final Switch sw = view.findViewById(R.id.switch1);
                 final TextView tx = view.findViewById(R.id.textViewId);
                 if (!sw.isChecked()) {
-//                    sw.setChecked(true);
                     App.getApi().checkNotification(FirebaseInstanceId.getInstance().getToken(), tx.getText().toString()).enqueue(new Callback<simpleResponceModel>() {
                         @Override
                         public void onResponse(Call<simpleResponceModel> call, Response<simpleResponceModel> response) {
@@ -80,11 +90,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                         }
                         @Override
                         public void onFailure(Call<simpleResponceModel> call, Throwable t) {
-                            //Произошла ошибка
                             Log.d("ERROR", t.toString() );
 
                         }
                     });
+                } else {
+                    Intent intent = new Intent(view.getContext(), IncidentActivity.class);
+                    intent.putExtra("notification_id",tx.getText().toString());
+                    view.getContext().startActivity(intent);
                 }
             }
         });
