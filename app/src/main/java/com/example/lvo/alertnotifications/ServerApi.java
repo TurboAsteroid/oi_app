@@ -23,5 +23,8 @@ public interface ServerApi {
     @POST("/incedent/checknotification")
     Call<simpleResponceModel> checkNotification(@Field("token") String token, @Field("notification_id") String id);
 
+    @GET("/incedent/getbynotification")
+    Call<incidentModel> getincedentbynotification(@Query("notification_id") String id);
+
 
 }

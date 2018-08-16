@@ -27,4 +27,5 @@
     <string name="password">Пароль</string>
     <string name="loginerror">Не верные данные, попробуйте ещё раз</string>
     <string name="sent">Отправить</string>
+    <string name="solutions">Предполагаемые действия</string>
 </resources>

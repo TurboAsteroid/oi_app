@@ -92,25 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
                     RecyclerView.Adapter mAdapter = new MyAdapter(att);
                     mRecyclerView.setAdapter(mAdapter);
-
-//                    if(att.size()!=0) {
-//                        String[] names = new String[att.size()];
-//                        int a = 0;
-//                        for (Notification x : att) {
-//                            names[a] = x.getTitle();
-//                            a = a + 1;
-//                        }
-//                        ListView listView = findViewById(R.id.mylist);
-//                        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, names);
-//                        listView.setAdapter(adapter);
-//                        listView.setOnItemClickListener(new OnItemClickListener() {
-//                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                                Toast.makeText(MainActivity.this, "itemClick: position = " + position + ", id = " + id, Toast.LENGTH_SHORT).show();
-//                                adapter.remove(adapter.getItem(position));
-//                                adapter.notifyDataSetChanged();
-//                            }
-//                        });
-//                    }
                 }
             }
             @Override
