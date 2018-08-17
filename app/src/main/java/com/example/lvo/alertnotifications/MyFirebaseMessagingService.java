@@ -72,6 +72,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // ПОЛУЧЯЕНИЕ СООБЩЕНИЙ ПРИ ОТКРЫТОМ ПРИЛОЖЕНИИ
     private void sendNotification(com.google.firebase.messaging.RemoteMessage remotemessage) {
         Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
