@@ -20,10 +20,10 @@ public interface ServerApi {
     Call<userInfoModel> registerUser(@Field("token") String token, @Field("login") String login, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("/incedent/checknotification")
+    @POST("/incident/checknotification")
     Call<simpleResponceModel> checkNotification(@Field("token") String token, @Field("notification_id") String id);
 
-    @GET("/incedent/getbynotification")
+    @GET("/incident/getbynotification")
     Call<incidentModel> getincedentbynotification(@Query("notification_id") String id);
 
 
