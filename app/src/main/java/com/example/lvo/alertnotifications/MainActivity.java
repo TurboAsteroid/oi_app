@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    };
 
-    private  void updateData() {
+    public void updateData() {
         App.getApi().getUserByToken(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<userInfoModel>() {
             @Override
             public void onResponse(Call<userInfoModel> call, Response<userInfoModel> response) {
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<userInfoModel> call, Throwable t) {
                 //Произошла ошибка
                 Log.d("ERROR", t.toString() );
-
             }
         });
     }
@@ -107,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Delegate.theMainActivity = this;
         setContentView(R.layout.activity_main);
 
 //        updateData();
@@ -148,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 //            }
 //        });
+    }
+
+    public void onNotificationReceive(){
+        updateData();
     }
 }
 
