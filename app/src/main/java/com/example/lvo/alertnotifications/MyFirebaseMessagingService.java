@@ -103,7 +103,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
         Log.d("!!!!!!!!!!!!", "!!!!!!!");
-        Delegate.theMainActivity.onNotificationReceive();
-
+        Delegate.theMainActivity.onNotificationReceive(remotemessage.getData().get("notification_id"));
     }
 }

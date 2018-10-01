@@ -63,6 +63,20 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    };
 
+    public void updateNotificationStatus(String notification_id, String status) {
+        App.getApi().checkNotification(FirebaseInstanceId.getInstance().getToken(), notification_id, status).enqueue(new Callback<simpleResponceModel>() {
+            @Override
+            public void onResponse(Call<simpleResponceModel> call, Response<simpleResponceModel> response) {
+                //Данные успешно пришли, но надо проверить response.body() на null
+                Log.d("REQUEST", response.body().getStatus() );
+            }
+            @Override
+            public void onFailure(Call<simpleResponceModel> call, Throwable t) {
+                Log.d("ERROR", t.toString() );
+
+            }
+        });
+    }
     public void updateData() {
         App.getApi().getUserByToken(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<userInfoModel>() {
             @Override
@@ -150,8 +164,9 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
-    public void onNotificationReceive(){
+    public void onNotificationReceive(String notification_id){
         updateData();
+        updateNotificationStatus(notification_id, "received");
     }
 }
 
