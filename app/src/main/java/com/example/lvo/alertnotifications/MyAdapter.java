@@ -78,27 +78,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Switch sw = view.findViewById(R.id.switch1);
-                final TextView tx = view.findViewById(R.id.textViewId);
-                if (!sw.isChecked()) {
-                    App.getApi().checkNotification(FirebaseInstanceId.getInstance().getToken(), tx.getText().toString()).enqueue(new Callback<simpleResponceModel>() {
-                        @Override
-                        public void onResponse(Call<simpleResponceModel> call, Response<simpleResponceModel> response) {
-                            //Данные успешно пришли, но надо проверить response.body() на null
-                            Log.d("REQUEST", response.body().getStatus() );
-                            sw.setChecked(true);
-                        }
-                        @Override
-                        public void onFailure(Call<simpleResponceModel> call, Throwable t) {
-                            Log.d("ERROR", t.toString() );
+            final Switch sw = view.findViewById(R.id.switch1);
+            final TextView tx = view.findViewById(R.id.textViewId);
+            if (!sw.isChecked()) {
+                App.getApi().checkNotification(FirebaseInstanceId.getInstance().getToken(), tx.getText().toString(), "checked").enqueue(new Callback<simpleResponceModel>() {
+                    @Override
+                    public void onResponse(Call<simpleResponceModel> call, Response<simpleResponceModel> response) {
+                        //Данные успешно пришли, но надо проверить response.body() на null
+                        Log.d("REQUEST", response.body().getStatus() );
+                        sw.setChecked(true);
+                    }
+                    @Override
+                    public void onFailure(Call<simpleResponceModel> call, Throwable t) {
+                        Log.d("ERROR", t.toString() );
 
-                        }
-                    });
-                } else {
-                    Intent intent = new Intent(view.getContext(), IncidentActivity.class);
-                    intent.putExtra("notification_id",tx.getText().toString());
-                    view.getContext().startActivity(intent);
-                }
+                    }
+                });
+            } else {
+                Intent intent = new Intent(view.getContext(), IncidentActivity.class);
+                intent.putExtra("notification_id",tx.getText().toString());
+                view.getContext().startActivity(intent);
+            }
             }
         });
         return new ViewHolder(v);
