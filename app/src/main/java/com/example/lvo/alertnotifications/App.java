@@ -26,7 +26,9 @@ public class App extends Application {
         super.onCreate();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://alert.elem.ru") //Базовая часть адреса
+//                .baseUrl("https://10.1.255.208:3002/") //Базовая часть адреса
+//                .baseUrl("https://apps.elem.ru") //Базовая часть адреса
+                .baseUrl("https://10.1.100.33:3002") //Базовая часть адреса
                 .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
                 .client(getUnsafeOkHttpClient())
                 .build();
