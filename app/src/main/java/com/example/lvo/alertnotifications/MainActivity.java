@@ -33,8 +33,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
+
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
     userInfoModel user;
@@ -68,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<simpleResponceModel> call, Response<simpleResponceModel> response) {
                 //Данные успешно пришли, но надо проверить response.body() на null
-                Log.d("REQUEST", response.body().getStatus() );
+                Log.d("11111111111111", response.body().getStatus() );
             }
             @Override
             public void onFailure(Call<simpleResponceModel> call, Throwable t) {
-                Log.d("ERROR", t.toString() );
+                Log.d("11111111111111rrr", t.toString() );
 
             }
         });
@@ -81,8 +92,9 @@ public class MainActivity extends AppCompatActivity {
         App.getApi().getUserByToken(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<userInfoModel>() {
             @Override
             public void onResponse(Call<userInfoModel> call, Response<userInfoModel> response) {
+
                 //Данные успешно пришли, но надо проверить response.body() на null
-                Log.d("REQUEST", response.body().toString() );
+                Log.d("11111111111111", response.body().toString() );
                 user = response.body();
 
                 if (Integer.parseInt(user.getStatus()) == 0) {
@@ -106,9 +118,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<userInfoModel> call, Throwable t) {
                 //Произошла ошибка
-                Log.d("ERROR", t.toString() );
+                Log.d("11111111111111", t.toString() );
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.navigation_exit:
+                logout();
+                return true;
+//            case R.id.navigation_download:
+//                loadfile();
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -123,9 +156,8 @@ public class MainActivity extends AppCompatActivity {
         Delegate.theMainActivity = this;
         setContentView(R.layout.activity_main);
 
+
 //        updateData();
-
-
 
 //        mTextMessage = (TextView) findViewById(R.id.message);
 //        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -164,9 +196,40 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
+    public void logout(){
+        App.getApi().logoutUser(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<simpleResponceModel>() {
+            @Override
+            public void onResponse(Call<simpleResponceModel> call, Response<simpleResponceModel> response) {
+                //Данные успешно пришли, но надо проверить response.body() на null
+                updateData();
+            }
+            @Override
+            public void onFailure(Call<simpleResponceModel> call, Throwable t) {
+                Log.d("ERROR", t.toString() );
+            }
+        });
+    }
+
+//    public void loadfile(){
+//        final String incident_id = "1";
+//        final String fname = "1.docx";
+//
+//        App.getApi().downloadFile(incident_id, fname).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                boolean writtenToDisk = writeResponseBodyToDisk(response.body(), fname);
+//            }
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                //Произошла ошибка
+//                Log.d("11111111111111", t.toString() );
+//            }
+//        });
+//    }
+
     public void onNotificationReceive(String notification_id){
         updateData();
         updateNotificationStatus(notification_id, "received");
     }
-}
 
+}

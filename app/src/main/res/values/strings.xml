@@ -39,4 +39,7 @@
     <string name="connecting">ToyVPN is connecting...</string>
     <string name="connected">ToyVPN is connected!</string>
     <string name="disconnected">ToyVPN is disconnected!</string>
+
+
+    <string name="title_exit">Выход</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.lvo.alertnotifications;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 
 public class incidentModel {
@@ -17,6 +18,20 @@ public class incidentModel {
     @SerializedName("solution")
     @Expose
     private String solution;
+    @SerializedName("incident_id")
+    @Expose
+    private String incident_id;
+    @SerializedName("files")
+    @Expose
+    private List<String> files = null;
+
+    public List<String> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<String> notification) {
+        this.files = notification;
+    }
 
     public String getTitle() {
         return title;
@@ -48,5 +63,13 @@ public class incidentModel {
 
     public void setSolution(String solution) {
         this.solution = solution;
+    }
+
+    public String getIncidentId() {
+        return incident_id;
+    }
+
+    public void setIncidentId(String solution) {
+        this.incident_id = incident_id;
     }
 }
